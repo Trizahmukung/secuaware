@@ -1,0 +1,23 @@
+{% extends "training/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="hero-section text-center">
+    <h1 class="display-4">Protect Your Business</h1>
+    <p class="lead">Cybersecurity awareness for Kenyan SMEs</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5>Getting Started</h5>
+                <p>Begin your security training today</p>
+                <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

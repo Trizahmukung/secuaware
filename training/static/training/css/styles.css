@@ -1,0 +1,23 @@
+/* Navbar styling */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.navbar-brand i, .nav-link i {
+    margin-right: 8px;
+}
+
+/* Main content padding to account for fixed navbar */
+body {
+    padding-top: 56px;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
