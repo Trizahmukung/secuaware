@@ -70,7 +70,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
         'OPTIONS': {
             'timeout': 20,
-            'journal_mode': 'wal',
+            #'journal_mode': 'wal',
         }
     }
 }

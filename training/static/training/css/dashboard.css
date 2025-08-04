@@ -1,0 +1,32 @@
+/* Dashboard Layout */
+.sidebar {
+    position: fixed;
+    top: 56px; /* Navbar height */
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 20px 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.main-content {
+    margin-top: 56px;
+    padding: 20px;
+}
+
+/* Card Styles */
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Table Styles */
+.table-responsive {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
