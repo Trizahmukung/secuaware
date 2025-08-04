@@ -1,0 +1,29 @@
+{% extends "training/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-{{ alert.threat_level }} text-white">
+            <h3>{{ alert.title }}</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Threat Level:</strong> 
+               <span class="badge bg-{{ alert.threat_level }}">
+                   {{ alert.get_threat_level_display }}
+               </span>
+            </p>
+            <p><strong>Affected Systems:</strong> {{ alert.affected_systems }}</p>
+            <hr>
+            <h5>Description</h5>
+            <p>{{ alert.description|linebreaks }}</p>
+            <hr>
+            <h5>Recommended Actions</h5>
+            <p>{{ alert.recommended_actions|linebreaks }}</p>
+        </div>
+        <div class="card-footer text-muted">
+            Posted: {{ alert.date_posted|date:"M d, Y H:i" }}
+        </div>
+    </div>
+    <a href="{% url 'threat_alerts' %}" class="btn btn-secondary mt-3">Back to Alerts</a>
+</div>
+{% endblock %}

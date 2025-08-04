@@ -1,0 +1,34 @@
+<!-- templates/training/dashboard.html -->
+{% extends "training/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Completed Modules</h5>
+                    <p class="card-text display-4">{{ completed }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">In Progress</h5>
+                    <p class="card-text display-4">{{ in_progress }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <h4>Recent Threat Alerts</h4>
+    <div class="list-group">
+        {% for alert in recent_alerts %}
+        <a href="{% url 'alert_detail' alert.id %}" class="list-group-item">
+            {{ alert.title }} <span class="badge badge-{{ alert.get_severity_display|lower }}">{{ alert.get_severity_display }}</span>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

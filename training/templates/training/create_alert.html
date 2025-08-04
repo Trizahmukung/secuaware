@@ -1,0 +1,13 @@
+{% extends "training/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Create New Threat Alert</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Publish Alert</button>
+        <a href="{% url 'threat_alerts' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

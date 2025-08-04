@@ -10,6 +10,14 @@
                     <a class="nav-link" href="{% url 'threat-alerts' %}">Threat Alerts</a>
                 </li>
                 <li class="nav-item">
+    <a class="nav-link" href="{% url 'threat_alerts' %}">
+        Alerts
+        {% if unread_alerts_count %}
+            <span class="badge bg-danger">{{ unread_alerts_count }}</span>
+        {% endif %}
+    </a>
+</li>
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'resources' %}">Resources</a>
                 </li>
             </ul>

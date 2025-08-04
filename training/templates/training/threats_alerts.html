@@ -1,0 +1,30 @@
+{% extends "training/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Threat Alerts</h2>
+    {% if request.user.is_staff %}
+        <a href="{% url 'create_alert' %}" class="btn btn-primary mb-3">Create New Alert</a>
+    {% endif %}
+    
+    <div class="list-group">
+        {% for alert in alerts %}
+            <a href="{% url 'alert_detail' alert.id %}" 
+               class="list-group-item list-group-item-action 
+                      {% if alert.threat_level == 'high' %}list-group-item-danger
+                      {% elif alert.threat_level == 'medium' %}list-group-item-warning
+                      {% endif %}">
+                <div class="d-flex justify-content-between">
+                    <h5>{{ alert.title }}</h5>
+                    <span class="badge bg-{{ alert.threat_level }}">
+                        {{ alert.get_threat_level_display }}
+                    </span>
+                </div>
+                <small class="text-muted">Posted: {{ alert.date_posted|date:"M d, Y" }}</small>
+            </a>
+        {% empty %}
+            <div class="alert alert-info">No active threats at this time.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
