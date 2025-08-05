@@ -7,6 +7,85 @@
 
 {% block styles %}
 {% block content %}
+
+div class="container mt-4">
+    <h2>My Learning Dashboard</h2>
+    
+    <!-- Progress Summary -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body text-center">
+                    <h5>Completion</h5>
+                    <div class="display-4">{{ completion_percentage }}%</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success">
+                <div class="card-body text-center">
+                    <h5>Completed</h5>
+                    <div class="display-4">{{ completed.count }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info">
+                <div class="card-body text-center">
+                    <h5>In Progress</h5>
+                    <div class="display-4">{{ in_progress.count }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body text-center">
+                    <h5>This Week</h5>
+                    <div class="display-4">{{ weekly_completed }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Visualization -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>My Learning Journey</h4>
+        </div>
+        <div class="card-body">
+            <canvas id="progressChart" height="100"></canvas>
+        </div>
+    </div>
+
+    <!-- Badges Section -->
+    <div class="card">
+        <div class="card-header">
+            <h4>My Achievements</h4>
+        </div>
+        <div class="card-body">
+            {% if badges %}
+            <div class="d-flex flex-wrap">
+                {% for badge in badges %}
+                <div class="badge-container m-2 text-center">
+                    <div class="badge-icon bg-{{ badge.badge_type }} rounded-circle p-3">
+                        <i class="fas fa-{% if badge.badge_type == 'completion' %}check-circle{% elif badge.badge_type == 'speed' %}bolt{% else %}brain{% endif %} fa-2x"></i>
+                    </div>
+                    <small class="d-block">{{ badge.get_badge_type_display }}</small>
+                    {% if badge.module %}
+                    <small class="text-muted">{{ badge.module.title }}</small>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-muted">Complete modules to earn badges!</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% include 'training/includes/progress_chart_js.html' %}
+{% endblock %}
+
 <div class="container">
     <div class="row">
         <div class="col-md-4">

@@ -102,6 +102,13 @@ class UserProgress(models.Model):
         
     def __str__(self):
         return f"{self.user.username} - {self.module.title}"
+    
+    @property
+    def time_spent(self):
+        if self.completion_date and self.module.created_at:
+            return (self.completion_date - self.module.created_at).total_seconds() / 60
+        return 0
+    
 # added UserAlert model to track user interactions with alerts
 class UserAlert(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -131,4 +138,18 @@ class ModuleContent(models.Model):
     class Meta:
         ordering = ['sequence']
 
+class UserBadge(models.Model):
+    BADGE_TYPES = [
+        ('completion', 'Module Completion'),
+        ('speed', 'Fast Learner'),
+        ('quiz', 'Quiz Master'),
+    ]
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    badge_type = models.CharField(max_length=20, choices=BADGE_TYPES)
+    awarded_date = models.DateTimeField(auto_now_add=True)
+    module = models.ForeignKey(TrainingModule, null=True, blank=True, on_delete=models.SET_NULL)
+    
+    class Meta:
+        unique_together = ('user', 'badge_type', 'module')
  

@@ -1,0 +1,37 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Current'],
+            datasets: [{
+                label: 'Modules Completed',
+                data: [2, 5, 7, 10, {{ completed.count }}],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                tension: 0.3,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Modules Completed'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Timeline'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
