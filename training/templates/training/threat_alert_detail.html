@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ alert.title }}</h1>
+<p><strong>Threat Level:</strong> {{ alert.get_threat_level_display }}</p>
+<p><strong>Posted:</strong> {{ alert.date_posted }}</p>
+<div>
+    <h3>Description</h3>
+    <p>{{ alert.description }}</p>
+</div>
+<div>
+    <h3>Recommended Actions</h3>
+    <p>{{ alert.recommended_actions }}</p>
+</div>
+{% endblock %}

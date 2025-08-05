@@ -10,20 +10,18 @@ admin.site.register(TrainingModule)
 # admin.site.register(UserProgress)
 admin.site.register(UserAlert)
 
-from .models import ThreatAlert, TrainingModule, UserProgress
+from .models import ThreatAlert, TrainingModule, UserProgress, EducationalResource, UserProfile, TrainingModule, UserAlert, ModuleContent
+
 
 @admin.register(ThreatAlert)
 class ThreatAlertAdmin(admin.ModelAdmin):
-    list_display = ('title', 'severity', 'created_at', 'is_active')
-    list_filter = ('severity', 'is_active')
-    search_fields = ('title', 'description')
+    list_display = ['id', 'title', 'threat_level', 'date_posted']  # Changed 'severity' to 'threat_level', 'created_at' to 'date_posted'
+    list_filter = ['threat_level', 'is_active']  # Changed 'severity' to 'threat_level'
+    search_fields = ['title', 'description']
+    readonly_fields = ['date_posted']
 
 @admin.register(UserProgress)
 class UserProgressAdmin(admin.ModelAdmin):
-    list_display = ('user', 'module', 'completed', 'last_accessed')
-    list_filter = ('completed', 'module')
-    search_fields = ('user__username', 'module__title')
-
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        return qs.select_related('user', 'module')
+    list_display = ['id', 'user', 'module', 'completed', 'completion_date']  # Removed 'last_accessed'
+    list_filter = ['completed', 'module']
+    search_fields = ['user__username', 'module__title']

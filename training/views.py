@@ -50,8 +50,9 @@ def login_view(request):
 def dashboard(request):
     completed = UserProgress.objects.filter(user=request.user, completed=True).count()
     in_progress = UserProgress.objects.filter(user=request.user, completed=False).count()
-    recent_alerts = ThreatAlert.objects.filter(is_active=True).order_by('-created_at')[:3]
-    
+    # recent_alerts = ThreatAlert.objects.filter(is_active=True).order_by('-created_at')[:3]
+    recent_alerts = ThreatAlert.objects.filter(is_active=True).order_by('-date_posted')[:3]
+
     context = {
         'completed': completed,
         'in_progress': in_progress,
@@ -75,6 +76,7 @@ def alert_detail(request, alert_id):
         user_alert.read = True
         user_alert.save()
     return render(request, 'training/alert_detail.html', {'alert': alert})
+
 @login_required
 def create_alert(request):
     if not request.user.is_staff:
@@ -87,6 +89,13 @@ def create_alert(request):
     else:
         form = ThreatAlertForm()
     return render(request, 'training/create_alert.html', {'form': form})
+
+def threat_alert_detail(request, alert_id):
+    alert = get_object_or_404(ThreatAlert, id=alert_id)
+    context = {
+        'alert': alert
+    }
+    return render(request, 'training/threat_alert_detail.html', context)
 
 #  Logout view
 def logout_view(request):
