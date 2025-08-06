@@ -166,3 +166,8 @@ def calculate_completion(user):
         completed=True
     ).count()
     return int((completed_resources / total_resources) * 100)
+
+# Module list
+def training_modules(request):
+    modules = TrainingModule.objects.filter(is_published=True).order_by('sequence')
+    return render(request, 'training/modules_list.html', {'modules': modules})

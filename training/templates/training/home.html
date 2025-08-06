@@ -2,22 +2,69 @@
 {% load static %}
 
 {% block content %}
-<div class="hero-section text-center">
-    <h1 class="display-4">Protect Your Business</h1>
-    <p class="lead">Cybersecurity awareness for Kenyan SMEs</p>
+<!-- Hero Section -->
+
+<<div class="hero-section text-center py-5 mb-4" style="background:#0066cc; color:white;">
+    <div class="container">
+        <h1 class="display-4">Protect Your Business</h1>
+        <p class="lead">Cybersecurity awareness for Kenyan SMEs</p>
+        <a href="{% url 'register' %}" class="btn btn-primary btn-lg mt-3">Get Started</a>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5>Getting Started</h5>
-                <p>Begin your security training today</p>
-                <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+<!-- Feature Cards (Add the 3-column system from my version) -->
+<div class="container">
+    <div class="row">
+        <!-- Threat Alerts Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-bell fa-3x text-primary mb-3"></i>
+                    <h4>Threat Alerts</h4>
+                    <p>Latest cybersecurity warnings tailored for Kenyan businesses</p>
+                    <a href="{% url 'threat_alerts' %}" class="btn btn-outline-primary">View Alerts</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Training Card (Your "Getting Started" content goes here) -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-graduation-cap fa-3x text-success mb-3"></i>
+                    <h4>Security Training</h4>
+                    <p>Begin your cybersecurity education today</p>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'register' %}" class="btn btn-success">Register</a>
+                       <a href="{% url 'training_modules' %}" class="btn btn-outline-success">Explore Modules</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resources Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-file-download fa-3x text-warning mb-3"></i>
+                    <h4>Resources</h4>
+                    <p>Downloadable guides and checklists</p>
+                    <a href="{% url 'resources' %}" class="btn btn-outline-warning">View Resources</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Additional Call-to-Action (Optional) -->
+<div class="container mt-5 text-center">
+    <div class="card">
+        <div class="card-body py-4">
+            <h3>Why Cybersecurity Matters for SMEs?</h3>
+            <p class="mb-4">Over 60% of Kenyan small businesses experience cyber threats annually. Start protecting your business today.</p>
+            <a href="{% url 'register' %}" class="btn btn-primary me-2">Register Now</a>
+            <a href="{% url 'threat_alerts' %}" class="btn btn-outline-secondary">See Recent Threats</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
-
-

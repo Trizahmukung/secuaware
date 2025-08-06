@@ -1,0 +1,17 @@
+{
+  "alerts": [
+    {
+      "title": "Fake M-Pesa Messages",
+      "description": "Scammers sending fake 'money received' SMS",
+      "severity": "high",
+      "date": "2023-05-10"
+    }
+  ],
+  "resources": [
+    {
+      "title": "Cybersecurity Checklist",
+      "type": "pdf",
+      "url": "#"
+    }
+  ]
+}

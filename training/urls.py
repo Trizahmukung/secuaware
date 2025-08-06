@@ -23,4 +23,7 @@ urlpatterns = [
     
     # Admin reports
     path('admin/reports/', views.admin_reports, name='admin_reports'),
+
+    # Module
+      path('training/', views.training_modules, name='training_modules'),
 ]

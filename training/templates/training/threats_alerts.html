@@ -1,30 +1,71 @@
 {% extends "training/base.html" %}
+{% load static %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Threat Alerts</h2>
-    {% if request.user.is_staff %}
-        <a href="{% url 'create_alert' %}" class="btn btn-primary mb-3">Create New Alert</a>
-    {% endif %}
-    
-    <div class="list-group">
-        {% for alert in alerts %}
-            <a href="{% url 'alert_detail' alert.id %}" 
-               class="list-group-item list-group-item-action 
-                      {% if alert.threat_level == 'high' %}list-group-item-danger
-                      {% elif alert.threat_level == 'medium' %}list-group-item-warning
-                      {% endif %}">
-                <div class="d-flex justify-content-between">
-                    <h5>{{ alert.title }}</h5>
-                    <span class="badge bg-{{ alert.threat_level }}">
-                        {{ alert.get_threat_level_display }}
-                    </span>
+    <!-- Improved Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            Threat Alerts
+            <span class="badge bg-secondary ms-2">{{ alerts.count }} active</span>
+        </h2>
+        {% if request.user.is_staff %}
+        <a href="{% url 'create_alert' %}" class="btn btn-primary">
+            <i class="fas fa-plus-circle me-1"></i> New Alert
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- Enhanced Alerts List -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="list-group list-group-flush">
+                {% for alert in alerts %}
+                <a href="{% url 'alert_detail' alert.id %}" 
+                   class="list-group-item list-group-item-action 
+                          {% if alert.threat_level == 'high' %}list-group-item-danger
+                          {% elif alert.threat_level == 'medium' %}list-group-item-warning
+                          {% else %}list-group-item-light{% endif %}">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="me-3">
+                            <h5 class="mb-1">{{ alert.title }}</h5>
+                            <p class="mb-1 text-muted small">
+                                <i class="fas fa-info-circle me-1"></i>
+                                {{ alert.description|truncatechars:80 }}
+                            </p>
+                            <small class="text-muted">
+                                <i class="far fa-clock me-1"></i>
+                                {{ alert.date_posted|date:"M d, Y" }} 
+                                {% if alert.is_recent %}
+                                <span class="badge bg-info ms-2">New</span>
+                                {% endif %}
+                            </small>
+                        </div>
+                        <span class="badge bg-{{ alert.threat_level }} py-2">
+                            {{ alert.get_threat_level_display }}
+                        </span>
+                    </div>
+                </a>
+                {% empty %}
+                <div class="list-group-item">
+                    <div class="alert alert-info mb-0">
+                        <i class="fas fa-check-circle me-2"></i>
+                        No active threats detected. Check back later.
+                    </div>
                 </div>
-                <small class="text-muted">Posted: {{ alert.date_posted|date:"M d, Y" }}</small>
-            </a>
-        {% empty %}
-            <div class="alert alert-info">No active threats at this time.</div>
-        {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Added Help Section -->
+    <div class="alert alert-light mt-4">
+        <h5><i class="fas fa-question-circle text-primary me-2"></i>Need help?</h5>
+        <p class="mb-1">If you suspect a security incident, contact our support team immediately.</p>
+        <a href="#" class="btn btn-sm btn-outline-primary mt-2">
+            <i class="fas fa-headset me-1"></i> Emergency Support
+        </a>
     </div>
 </div>
 {% endblock %}
